@@ -1,9 +1,11 @@
+import { preview } from 'vite';
 import { chromium } from 'playwright';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const base = process.env.SLIDE_URL || 'http://127.0.0.1:4173/';
+const server = process.env.SLIDE_URL ? null : await preview({ preview: { host: '127.0.0.1', port: 0 } });
+const base = process.env.SLIDE_URL || `http://127.0.0.1:${server.httpServer.address().port}/`;
 const out = new URL('../test-results/', import.meta.url);
 const outDir = fileURLToPath(out);
 mkdirSync(outDir, { recursive: true });
@@ -43,6 +45,9 @@ await page.locator('#next').click();
 const buttonNext = await page.locator('.slide.active').getAttribute('id');
 writeFileSync(join(outDir, 'report.json'), JSON.stringify({ report, keyboardNext, buttonNext, errors }, null, 2));
 await browser.close();
+if (server) {
+  await new Promise((resolveClose, rejectClose) => server.httpServer.close(error => error ? rejectClose(error) : resolveClose()));
+}
 if (errors.length || report.some(x => x.overflow.length || x.brokenImages.length || x.scrollHeight > 900 || (x.sourceGap !== null && x.sourceGap < 5)) || keyboardNext !== 'slide-2' || buttonNext !== 'slide-3') {
   console.error(JSON.stringify({ report, keyboardNext, buttonNext, errors }, null, 2));
   process.exitCode = 1;

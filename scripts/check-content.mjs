@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 assert.equal((html.match(/<section class="slide(?: cover active)?"/g) || []).length, 11, '정확히 11장이어야 함');
-assert.equal((html.match(/<img\b/g) || []).length, 2, '표지 기사 스크랩 캡처 두 장을 배치해야 함');
+assert.equal((html.match(/<img\b/g) || []).length, 4, '표지 기사 스크랩 2장 및 2p 유학생 이미지 2장을 배치해야 함');
 assert.ok(html.includes('<title>부산 신문 속 유학생</title>'), '새 제목 누락');
 assert.ok(html.includes('news-busan-article.png') && html.includes('news-kookje-article.png'), '신문 기사 캡처 누락');
 assert.ok(html.includes('busan-newspaper-international-students.pdf'), 'PDF 링크 누락');
