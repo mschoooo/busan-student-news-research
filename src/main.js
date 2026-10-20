@@ -19,7 +19,10 @@ let current = 0;
 let touchStart = null;
 
 function fitDeck() {
-  const scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+  const barHeight = 46;
+  const availH = Math.max(window.innerHeight - barHeight, 200);
+  const scale = Math.min(window.innerWidth / 1600, availH / 900);
+  deck.style.top = `${availH / 2}px`;
   deck.style.transform = `translate(-50%, -50%) scale(${scale})`;
 }
 
