@@ -24,4 +24,12 @@ node scripts/visual-check.mjs
 
 `visual-check.mjs`는 Playwright Chromium으로 8장의 화면과 이동을 확인합니다. 처음 실행할 때는 `npx playwright install chromium`이 필요할 수 있습니다.
 
+## 게시
+
+```bash
+npm run deploy
+```
+
+빌드 결과를 `gh-pages` 브랜치에 게시합니다. GitHub Pages의 소스는 해당 브랜치의 루트입니다.
+
 제작 내용은 `orca_busan_student_research_slide_plan.md`를 기준으로 구성했습니다. 해당 원문과 문헌고찰 PDF는 로컬 작업 자료이며 공개 저장소에는 포함하지 않았습니다.
