@@ -52,8 +52,19 @@ a:hover{color:var(--accent)}
    ========================================================================== */
 .cover{padding:0;background:#191715;color:#f5f1e8;display:none}
 .cover.active{display:block}
-.cover::before{background:#38332d;height:4px}
-.cover::after{background:var(--accent);left:88px;width:180px;height:4px}
+.cover::before{background:#38332d;height:4px;z-index:4}
+.cover::after{background:var(--accent);left:88px;width:180px;height:4px;z-index:4}
+.cover-bg{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-size:cover;
+  background-position:left 62%;
+  background-repeat:no-repeat;
+  filter:grayscale(100%) contrast(1.45) brightness(0.95) sepia(25%);
+  opacity:.068;
+  pointer-events:none;
+}
 
 .cover-copy{position:absolute;z-index:3;left:88px;top:68px;bottom:68px;width:650px;display:flex;flex-direction:column;justify-content:space-between}
 .cover-kicker{display:flex;align-items:center;gap:12px;font-size:16px;color:#b8afa0;font-weight:500;letter-spacing:-.01em;margin:0;padding-bottom:16px;border-bottom:1px solid rgba(245,241,232,.12)}
