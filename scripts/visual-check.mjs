@@ -28,7 +28,11 @@ for (let i = 1; i <= 8; i++) {
       const r = el.getBoundingClientRect();
       return r.width && r.height && (r.left < slideRect.left - 1 || r.right > slideRect.right + 1 || r.top < slideRect.top - 1 || r.bottom > slideRect.bottom + 1);
     }).map(el => ({ tag: el.tagName, text: el.textContent.trim().slice(0, 45), rect: el.getBoundingClientRect().toJSON() }));
-    return { id: slide.id, overflow, scrollWidth: slide.scrollWidth, scrollHeight: slide.scrollHeight };
+    const source = slide.querySelector('.source');
+    const sourceTop = source?.getBoundingClientRect().top ?? Infinity;
+    const contentBottom = Math.max(...[...slide.children].filter(el => el !== source && getComputedStyle(el).position !== 'absolute').map(el => el.getBoundingClientRect().bottom));
+    const brokenImages = [...slide.querySelectorAll('img')].filter(img => !img.complete || img.naturalWidth === 0).map(img => img.getAttribute('src'));
+    return { id: slide.id, overflow, sourceGap: Number.isFinite(sourceTop) ? Math.round(sourceTop - contentBottom) : null, brokenImages, scrollWidth: slide.scrollWidth, scrollHeight: slide.scrollHeight };
   });
   report.push(result);
 }
@@ -39,7 +43,7 @@ await page.locator('#next').click();
 const buttonNext = await page.locator('.slide.active').getAttribute('id');
 writeFileSync(join(outDir, 'report.json'), JSON.stringify({ report, keyboardNext, buttonNext, errors }, null, 2));
 await browser.close();
-if (errors.length || report.some(x => x.overflow.length) || keyboardNext !== 'slide-2' || buttonNext !== 'slide-3') {
+if (errors.length || report.some(x => x.overflow.length || x.brokenImages.length || x.scrollHeight > 900 || (x.sourceGap !== null && x.sourceGap < 5)) || keyboardNext !== 'slide-2' || buttonNext !== 'slide-3') {
   console.error(JSON.stringify({ report, keyboardNext, buttonNext, errors }, null, 2));
   process.exitCode = 1;
 } else console.log('8장 화면 경계 및 키보드·버튼 이동 확인 완료');
