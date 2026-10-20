@@ -1,43 +1,19 @@
-# 부산 지역 유학생 보도 분석 계획
+# 부산 신문 속 유학생
 
-데이터리터러시의 이해 중간고사 대체 과제용 8장 HTML 슬라이드덱입니다. 2023년 하반기부터 2026년 상반기까지 부산일보·국제신문의 외국인 유학생 보도를 어떻게 수집·정제·분류·집계할지 설명합니다.
+부산일보와 국제신문의 외국인 유학생 보도를 대상으로 한 8장짜리 데이터 분석 계획 슬라이드입니다. 조사 기간은 2023년 하반기부터 2026년 상반기까지이며, 기사량·주제·재현 관점·당사자 발언·기사 유형을 함께 살핍니다. 차트의 빈 칸은 아직 수집·분류하지 않은 결과를 임의로 채우지 않기 위한 계획 표시입니다.
 
-현재는 분석 계획 단계이므로 기사 수나 비율을 표시하지 않습니다. 7장의 차트는 결과가 아니라 축과 계산 방법을 보여주는 설계도입니다. 주제와 별도로 유학생의 지역 자원·지역 구성원 관점이 나타나는지 각각 기록하고, 주제×관점 및 주제·관점별 발언 포함률을 확인하도록 설계를 확장했습니다. 한 기사에 두 관점이 함께 나타나거나 모두 나타나지 않을 수 있습니다. 표본이 적으면 빈 셀의 비율 순위를 만들지 않고 건수와 근거 문장을 검토합니다.
+표지의 기사 화면은 2026년 10월 20일 원문 웹페이지에서 일부를 캡처한 것입니다. [부산일보 기사(2025.1.2.)](https://www.busan.com/view/busan/view.php?code=2025010218174626358), [국제신문 1면 기사(2025.4.17.)](https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0300&key=20250418.22001005833)로 연결됩니다. 부산일보 캡처에서는 제호와 제목을 한 화면에 보이도록 비어 있는 광고 영역을 숨겼습니다. 4장 캠퍼스 사진은 [Donggeon / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:BUFS.jpg)의 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 자료로 화면에 맞게 잘랐습니다.
 
-## 이미지와 1면 기사
-
-- 표지 부산 전경: [S h y numis / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Skyline_of_Busan_Including_Gwangan_Bridge,_Marine_City_and_LCT_Skyscrapers.jpg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). 화면 비율에 맞게 잘라 표시했습니다.
-- 4장 부산외국어대학교 캠퍼스: [Donggeon / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:BUFS.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 화면 비율에 맞게 잘라 표시했습니다.
-- 2장의 [2023년 12월 19일](https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0300&key=20231219.22001006105), [2025년 4월 17일](https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0300&key=20250418.22001005833) 국제신문 1면 제목은 분석 대상 예시입니다. 신문 지면과 기사 사진은 복제하지 않았습니다.
-
-장별 이미지 배치 검토는 `slide-production-plan.md`에 기록했습니다.
-
-## 실행
+## 실행 및 검증
 
 ```bash
 npm install
-npm run dev
-```
-
-방향키, 스페이스, 화면 오른쪽 하단 버튼으로 이동합니다. `#1`부터 `#8`까지의 URL 해시로 각 장에 바로 접근할 수 있습니다.
-
-## 빌드와 확인
-
-```bash
 npm test
-npm run build
+npm run pdf
 npm run preview
 node scripts/visual-check.mjs
 ```
 
-`visual-check.mjs`는 Playwright Chromium으로 8장의 화면과 이동을 확인합니다. 처음 실행할 때는 `npx playwright install chromium`이 필요할 수 있습니다.
+`npm run pdf`는 HTML을 빌드하고 16:9 PDF를 `output/pdf/busan-newspaper-international-students.pdf`에 저장한 뒤 게시용 사본을 `public/`에 둡니다. 화살표·스페이스 키 또는 화면 오른쪽 아래 버튼으로 슬라이드를 이동할 수 있습니다. 게시용 빌드와 PDF를 함께 갱신하려면 `npm run deploy`를 사용합니다.
 
-## 게시
-
-```bash
-npm run deploy
-```
-
-빌드 결과를 `gh-pages` 브랜치에 게시합니다. GitHub Pages의 소스는 해당 브랜치의 루트입니다.
-
-제작 내용은 `orca_busan_student_research_slide_plan.md`를 기준으로 구성했습니다. 해당 원문과 문헌고찰 PDF는 로컬 작업 자료이며 공개 저장소에는 포함하지 않았습니다.
+원본 과제 계획과 문헌고찰 자료는 공개 저장소에 포함하지 않았습니다. 상세 제작 계획은 `slide-production-plan.md`에 있습니다.
