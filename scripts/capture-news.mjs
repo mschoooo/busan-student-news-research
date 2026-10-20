@@ -32,16 +32,16 @@ await page.setContent(`<!doctype html>
     margin-bottom: 4px;
   }
   .masthead-crop {
-    width: 205px;
-    height: 46px;
+    width: 216px;
+    height: 58px;
     overflow: hidden;
     position: relative;
     mix-blend-mode: multiply;
   }
   .masthead-crop img {
     position: absolute;
-    left: -115px;
-    top: -66px;
+    left: -114px;
+    top: -62px;
     width: 1440px;
     filter: contrast(1.15);
   }
@@ -164,16 +164,16 @@ await page.setContent(`<!doctype html>
     margin-bottom: 4px;
   }
   .masthead-crop {
-    width: 210px;
-    height: 48px;
+    width: 230px;
+    height: 58px;
     overflow: hidden;
     position: relative;
     mix-blend-mode: multiply;
   }
   .masthead-crop img {
     position: absolute;
-    left: -608px;
-    top: -54px;
+    left: -605px;
+    top: -49px;
     width: 1440px;
     filter: contrast(1.15);
   }
