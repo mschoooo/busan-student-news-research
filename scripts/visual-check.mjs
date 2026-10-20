@@ -14,7 +14,7 @@ page.on('pageerror', error => errors.push(error.message));
 await page.goto(base, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 const report = [];
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 11; i++) {
   await page.goto(`${base}#${i}`, { waitUntil: 'networkidle' });
   await page.waitForTimeout(850);
   await page.screenshot({ path: join(outDir, `slide-${i}.png`) });
@@ -46,4 +46,4 @@ await browser.close();
 if (errors.length || report.some(x => x.overflow.length || x.brokenImages.length || x.scrollHeight > 900 || (x.sourceGap !== null && x.sourceGap < 5)) || keyboardNext !== 'slide-2' || buttonNext !== 'slide-3') {
   console.error(JSON.stringify({ report, keyboardNext, buttonNext, errors }, null, 2));
   process.exitCode = 1;
-} else console.log('10장 화면 경계 및 키보드·버튼 이동 확인 완료');
+} else console.log('11장 화면 경계 및 키보드·버튼 이동 확인 완료');

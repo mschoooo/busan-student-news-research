@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-assert.equal((html.match(/<section class="slide(?: cover active)?"/g) || []).length, 10, '정확히 10장이어야 함');
+assert.equal((html.match(/<section class="slide(?: cover active)?"/g) || []).length, 11, '정확히 11장이어야 함');
 assert.equal((html.match(/<img\b/g) || []).length, 2, '표지 기사 스크랩 캡처 두 장을 배치해야 함');
 assert.ok(html.includes('<title>부산 신문 속 유학생</title>'), '새 제목 누락');
 assert.ok(html.includes('news-busan-article.png') && html.includes('news-kookje-article.png'), '신문 기사 캡처 누락');
@@ -11,4 +11,4 @@ for (const term of ['2023.7.1.~2026.6.30.', '2024.3.28.', '부산일보·국제�
 }
 assert.ok(html.includes('실제 1면 기사 사례'), '신문 1면 사례 누락');
 assert.ok(!/[0-9]+\s*건의 기사/.test(html), '실제 분석 전 가상 기사 수 표시 금지');
-console.log('10장, 핵심 내용, 계획 차트 표시 확인 완료');
+console.log('11장, 핵심 내용, 계획 차트 표시 확인 완료');
