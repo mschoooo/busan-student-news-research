@@ -15,7 +15,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 1600, height: 900 }, deviceScaleFactor: 1 });
   await page.goto(`http://127.0.0.1:${address.port}/`, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  await page.locator('.cover-clippings img').first().waitFor();
+  await page.locator('.cover-scrapbook img').first().waitFor();
   await page.emulateMedia({ media: 'print', reducedMotion: 'reduce' });
   await page.pdf({ path: output, printBackground: true, preferCSSPageSize: true, margin: { top: 0, right: 0, bottom: 0, left: 0 } });
   await copyFile(output, publicCopy);
